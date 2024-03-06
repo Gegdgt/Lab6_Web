@@ -1,0 +1,27 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #3c3c3c;
+  color: #fff;
+  border-radius: 10px;
+}
+
+.navbar-brand a{
+  font-size: 1.5rem;
+  color: white;
+  text-decoration: none;
+  font-family: 'SF-Pro', sans-serif;
+}
+
+.navbar-links a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 10px;
+  font-family: 'SF-Pro', 'Helvetica Neue', sans-serif;
+}
+
+.navbar-links a:hover {
+  text-decoration: underline;
+}
