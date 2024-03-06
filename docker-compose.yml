@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+    react-app:
+        build:
+            context: .
+            dockerfile: dockerfiles/nodejs/Dockerfile
+        ports:
+            - "3000:3000"
+    mongodb:
+        build : 
+            context: ./
+            dockerfile: dockerfiles/mongodb/Dockerfile
+        container_name: mongodb
+        environment:
+            - PUID=1000
+            - PGID=1000
+        volumes:
+            - /home/roadside/mongodb/database:/data/db
+        ports:
+            - 27017:27017
+        restart: unless-stopped
+volumes:
+    mongodb-data:
+        driver: "local"
