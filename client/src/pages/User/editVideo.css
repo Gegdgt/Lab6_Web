@@ -1,0 +1,40 @@
+.edit-video-form {
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .edit-video-form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .edit-video-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  .edit-video-form button {
+    padding: 10px 20px;
+    background-color: #003369;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .edit-video-form input[type="text"]:hover,
+  .edit-video-form input[type="text"]:focus {
+    border-color: #007bff;
+  }
+  
+  .edit-video-form button:hover {
+    background-color: #001f3f;
+  }
+  
