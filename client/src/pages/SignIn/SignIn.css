@@ -1,0 +1,123 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f2f2f2;
+}
+
+.form-wrapper {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 400px; 
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333; 
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.password-toggle {
+    position: relative;
+}
+
+.password-toggle input[type="password"] {
+    padding-right: 30px;
+}
+
+.password-toggle .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+}
+
+.password-toggle .toggle-password:hover {
+    color: #333;
+}
+
+.form-wrapper > h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.form-wrapper > form > .form-group {
+    margin-bottom: 20px;
+}
+
+.form-wrapper > form > .form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-wrapper > form > .form-group > label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-wrapper > form > .form-group > .form-control {
+    width: calc(100% - 24px); 
+}
+
+.form-wrapper > form > .form-group > .toggle-password {
+    cursor: pointer;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.form-wrapper > form > .form-group > .toggle-password:hover {
+    color: #333;
+}
+
+.form-wrapper > form > .form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-wrapper > form > .form-group > input[type="submit"] {
+    width: 100%;
+}
+
+.form-wrapper > div {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-wrapper > div > a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.form-wrapper > div > a:hover {
+    text-decoration: underline;
+}
