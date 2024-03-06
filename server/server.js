@@ -32,6 +32,24 @@ app.use('/signin', (req, res) => {
   .then(Usuarios => res.json(Usuarios))
   .catch(err => res.json(err))
 });
+
+app.delete('/videos/:videoId', (req, res) => {
+  const videoId = req.params.videoId;
+
+  Video.findOneAndDelete({ video_id: videoId })
+    .then(deletedVideo => {
+      if (!deletedVideo) {
+        return res.status(404).send('Video not found');
+      }
+
+      res.send('Video deleted successfully');
+    })
+    .catch(error => {
+      console.error('Error deleting video:', error);
+      res.status(500).send('Error deleting video');
+    });
+});
+
 //Edit Only Name
 app.put('/videos/:video_id', (req, res) => {
   const video_id = req.params.video_id;

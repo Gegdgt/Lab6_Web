@@ -45,13 +45,28 @@ function User() {
         if (showInitialInfo == true) {
           setEditingVideo(video); // Set the video to be edited
           setShowEditButton(true);
-          setShowInitialInfo(false); // Ocultar recomendaciones iniciales al presionar editar
+          setShowInitialInfo(false);
         } else {
           setEditingVideo(null); // Clear the video to be edited
           setShowEditButton(false);
-          setShowInitialInfo(true); // Mostrar recomendaciones iniciales al presionar cancelar
+          setShowInitialInfo(true); 
         }
       }
+
+      function deleteClick(video) {
+        const confirmDelete = window.confirm('Are you sure you want to delete this video?');
+        if (confirmDelete) {
+            axios.delete(`http://localhost:5050/videos/${video.video_id}`)
+                .then(response => {
+                    console.log('Video deleted:', response.data);
+                    // Remove the deleted video from the videos array
+                    setVideos(videos.filter(v => v._id !== video._id));
+                })
+                .catch(error => {
+                    console.error('Error deleting video:', error);
+                });
+        }
+    }
 
     return (
         <div className="user-container">
@@ -72,7 +87,7 @@ function User() {
                         </Link>
                         <div className="pagination">
                             <button onClick={() => editClick(video)}>Editar</button>
-                            <button >Borrar</button>
+                            <button onClick={() => deleteClick(video)}>Borrar</button>
                         </div>
                     </div>
                     
