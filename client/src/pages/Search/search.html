@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcionales</title>
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
+
+</head>
+
+<body>
+
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const { Link } = ReactRouterDOM;
+        const Maindefimage = 'ruta/a/tu/imagen/por/defecto.jpg'; // Asegúrate de reemplazar esto con la ruta a tu imagen por defecto
+
+        function Main() {
+            const [videos, setVideos] = useState([]);
+            const [page, setPage] = useState(1);
+            const [searchTerm, setSearchTerm] = useState('');
+        
+            useEffect(() => {
+                const pageSize = 10;
+                axios.get(`http://localhost:5050/videos?page=${page}&pageSize=${pageSize}`)
+                    .then(response => {
+                        const fetchedVideos = response.data;
+                        const videosWithCreators = fetchedVideos.map(video => {
+                            video.duration = Math.round(video.duration / 60);
+                            return video;
+                        });
+                        setVideos(videosWithCreators);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching videos', error);
+                    });
+            }, [page]);
+        
+            const filteredVideos = videos.filter(video =>
+                video.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        
+            return (
+                <div className="main-container">
+                    <input
+                        className="buscar"
+                        type="text"
+                        placeholder="Buscar..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    <div className="video-grid">
+                        {filteredVideos.map(video => (
+                            <div key={video._id} className="video-card">
+                                <img className='miniature' src={video.imageUrl || Maindefimage} alt="Miniatura de video" />
+                                <Link to={`/video/${video.video_id}`}>
+                                    <h3>{video.name}</h3>
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="pagination">
+                        <button onClick={() => setPage(page - 1)} disabled={page === 1}>Previous</button>
+                        <button onClick={() => setPage(page + 1)}>Next</button>
+                    </div>
+                </div>
+            );
+        }
+        const root = ReactDOM.createRoot(document.getElementById('root'))
+        root.render(<Main />)
+    </script>
+</body>
+
+</html>

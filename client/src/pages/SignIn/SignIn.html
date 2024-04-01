@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
+
+    <link rel="stylesheet" href="SignIn.css">
+</head>
+
+<body>
+
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState } = React;
+        const { useHistory } = ReactRouterDOM;
+
+        function SignIn() {
+            const [name, setName] = useState('');
+            const [username, setUsername] = useState('');
+            const [password, setPassword] = useState('');
+            const [showPassword, setShowPassword] = useState(false);
+
+            const history = useHistory();
+
+            const user_id = Math.floor(Math.random() * (99999999999999 - 10000000000000 + 1)) + 10000000000000;
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+
+                axios.post('http://localhost:5050/signin', { name, username, password })
+
+                axios.post('http://localhost:8000/signin', { user_id, name, username, password })
+                    .then(result => console.log(result))
+                    .catch(error => console.error(error))
+                history.push('/login');
+            };
+
+            const togglePasswordVisibility = () => {
+                setShowPassword(!showPassword);
+            };
+
+            return (
+                <div className="container">
+                    <div className="form-wrapper">
+                        <h3 style={{ textAlign: 'center', color: 'white' }}>Sign In</h3>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label htmlFor="name">Name</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="username">Username</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="username"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                />
+                            </div>
+                            <div className="form-group password-toggle">
+                                <label htmlFor="password">Password</label>
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    className="form-control"
+                                    id="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                                <span className="toggle-password" onClick={togglePasswordVisibility}>
+                                    {showPassword ? "Hide" : "Show"}
+                                </span>
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    type="submit"
+                                    value="Sign In"
+                                    className="btn btn-primary"
+                                />
+                            </div>
+                        </form>
+                        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                            Already have an account? <a href="/login">Log In</a>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'))
+        root.render(<SignIn />)
+    </script>
+</body>
+
+</html>

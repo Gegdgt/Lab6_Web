@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
+
+    <link rel="stylesheet" href="LogIn.css">
+</head>
+
+<body>
+
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState } = React;
+        const { useHistory } = ReactRouterDOM;
+
+        function LogIn() {
+            const [username, setUsername] = useState('');
+            const [password, setPassword] = useState('');
+            const history = useHistory();
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                axios.post('http://localhost:5050/login', { username, password })
+                    .then(result => {
+                        console.log(result);
+                        if (result.data.message === "Completado") {
+                            localStorage.setItem('username', username);
+                            localStorage.setItem('user_id', result.data.user_id);
+                            console.log(username);
+                            history.push('/');
+                        }
+                    })
+                    .catch(error => console.error(error));
+            };
+
+            return (
+                <div className="container">
+                    <div className="form-wrapper">
+                        <h3 style={{ textAlign: 'center', color: 'white' }}>Log In</h3>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label htmlFor="username">Username</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="username"
+                                    onChange={(e) => setUsername(e.target.value)}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="password">Password</label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    id="password"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    type="submit"
+                                    value="Log In"
+                                    className="btn btn-primary"
+                                />
+                            </div>
+                        </form>
+                        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                            Don't have an account? <a href="/signin">Create one</a>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'))
+        root.render(<LogIn />)
+    </script>
+</body>
+
+</html>
