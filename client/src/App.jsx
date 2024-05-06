@@ -10,6 +10,7 @@ import LogIn from './pages/LogIn/LogIn.jsx';
 import SignIn from './pages/SignIn/SignIn.jsx';
 import Create from './pages/Create/Create.jsx';
 import Search from './pages/Search/search.jsx';
+import Terms from './pages/terms/terms.jsx';
 import './App.css';
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/video" element={<Video />} />
           <Route path="/" element={<Main />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/terms" element={<Terms />} />
         </Routes>
       </div>
     </Router>
