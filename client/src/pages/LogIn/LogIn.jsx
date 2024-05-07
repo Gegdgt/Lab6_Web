@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../context/UserContext'; 
 import axios from 'axios';
 import './LogIn.css';
 
@@ -7,16 +8,22 @@ function LogIn() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { login } = useUser();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5050/login', { username, password })
+    axios.post('http://localhost:5050/login', { username, password})
       .then(result => {
         console.log(result);
         if (result.data.message === "Completado") {
+          const isCreator = result.data.is_creator; 
           localStorage.setItem('username', username);
           localStorage.setItem('user_id', result.data.user_id);
+          localStorage.setItem('is_creator', isCreator);
           console.log(username);
+          console.log(result.data.user_id);
+          console.log(isCreator);
+          login(username, isCreator);
           navigate('/');
         }
       })

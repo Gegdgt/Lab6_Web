@@ -10,14 +10,10 @@ function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
-
   const user_id = Math.floor(Math.random() * (99999999999999 - 10000000000000 + 1)) + 10000000000000;
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    axios.post('http://localhost:5050/signin', { name, username, password })
-
-    axios.post('http://localhost:8000/signin', { user_id, name, username, password })
+    axios.post('http://localhost:5050/signin', { user_id, name, username, password, is_creator: false})
       .then(result => console.log(result))
       .catch(error => console.error(error))
     navigate('/login');
