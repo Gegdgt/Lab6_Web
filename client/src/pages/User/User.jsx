@@ -7,12 +7,12 @@ import videodefimage from '../../img/videodef.jpg';
 import EditVideo from './editVideo.jsx';
 
 function User() {
-    const [showEditButton, setShowEditButton] = useState(false);
-    const [showInitialInfo, setShowInitialInfo] = useState(true);
-    const [editingVideo, setEditingVideo] = useState(null);
+    const [showEditButton, setShowEditButton] = useState(false); // Mostrar botón de edición
+    const [showInitialInfo, setShowInitialInfo] = useState(true); // Mostrar información inicial
+    const [editingVideo, setEditingVideo] = useState(null); // Editar video
     const username = localStorage.getItem('username');
     const [user, setUser] = useState({
-        name: username || 'Random Name',
+        name: username || 'Nombre Aleatorio',
         isCreator: true,
         imageUrl: ''
     });
@@ -28,42 +28,42 @@ function User() {
                             console.log(response.data);
                             setVideos(response.data);
                         } else {
-                            console.error('Unexpected server response:', response.data);
+                            console.error('Respuesta inesperada del servidor:', response.data);
                         }
                     })
                     .catch(error => {
-                        console.error('Error fetching videos', error);
+                        console.error('Error al obtener los videos', error);
                     });
             })
             .catch(error => {
-                console.error('Error fetching user', error);
+                console.error('Error al obtener el usuario', error);
             });
     }, [username]);
 
     function editClick(video) {
-        console.log('Editing video:', video); // Add this line
-        if (showInitialInfo == true) {
-          setEditingVideo(video); // Set the video to be edited
+        console.log('Editando video:', video); // Agregar esta línea
+        if (showInitialInfo === true) {
+          setEditingVideo(video); // Establecer el video a editar
           setShowEditButton(true);
           setShowInitialInfo(false);
         } else {
-          setEditingVideo(null); // Clear the video to be edited
+          setEditingVideo(null); // Limpiar el video a editar
           setShowEditButton(false);
           setShowInitialInfo(true); 
         }
       }
 
       function deleteClick(video) {
-        const confirmDelete = window.confirm('Are you sure you want to delete this video?');
+        const confirmDelete = window.confirm('¿Estás seguro de que quieres eliminar este video?');
         if (confirmDelete) {
             axios.delete(`http://localhost:5050/videos/${video.video_id}`)
                 .then(response => {
-                    console.log('Video deleted:', response.data);
-                    // Remove the deleted video from the videos array
+                    console.log('Video eliminado:', response.data);
+                    // Eliminar el video eliminado del array de videos
                     setVideos(videos.filter(v => v._id !== video._id));
                 })
                 .catch(error => {
-                    console.error('Error deleting video:', error);
+                    console.error('Error al eliminar el video:', error);
                 });
         }
     }
@@ -71,16 +71,16 @@ function User() {
     return (
         <div className="user-container">
             <div className="profile-info">
-                <img className='profile-image' src={user.imageUrl || userdefimage} alt="User profile" />
+                <img className='profile-image' src={user.imageUrl || userdefimage} alt="Perfil de usuario" />
                 <h2>{user.name}</h2>
 
-                <p>{user.isCreator ? 'Creator' : 'Not a creator'}</p>
+                <p>{user.isCreator ? 'Creador' : 'No es creador'}</p>
             </div>
             <div className="videos">
                 {videos.map(video => (
                     <div key={video._id} className="video-card">
                         <Link to={`/video/${video.video_id}`}>
-                            <img className='video-thumbnail' src={video.imageUrl || videodefimage} alt="Video thumbnail" />
+                            <img className='video-thumbnail' src={video.imageUrl || videodefimage} alt="Miniatura de video" />
                         </Link>
                         <Link to={`/video/${video.video_id}`}>
                             <h3>{video.name}</h3>
