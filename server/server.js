@@ -1,3 +1,4 @@
+import serverless from "serverless-http";
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -5,7 +6,7 @@ const signin = require('./routes/signin.js');
 const Video = require('./routes/home.js');
 const Comment = require('./routes/comment.js');
 const app = express();
-
+const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 
@@ -211,6 +212,6 @@ app.post('/videos/:videoId/comments', (req, res) => {
 });
 
 
-app.listen(5050, () => {
-  console.log(`Servidor escuchando en el puerto 5050`);
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
