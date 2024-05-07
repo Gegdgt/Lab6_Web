@@ -12,7 +12,7 @@ function LogIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post('https://back1122.netlify.app/login', { username, password})
+    axios.post('https://hdt-6-backend.vercel.app/login', { username, password})
       .then(result => {
         console.log(result);
         if (result.data.message === "Completado") {
