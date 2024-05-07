@@ -11,7 +11,7 @@ function Terms() {
 
     // Función para enviar la solicitud al aceptar los términos
     const handleAccept = () => {
-        axios.post('http://localhost:5050/acceptTerms', {
+        axios.post('https://hdt-6-backend.vercel.app/acceptTerms', {
             username: username,
             accept: true
         })
@@ -27,7 +27,7 @@ function Terms() {
 
     // Función para enviar la solicitud al rechazar los términos
     const handleReject = () => {
-        axios.post('http://localhost:5050/acceptTerms', {
+        axios.post('https://hdt-6-backend.vercel.app/acceptTerms', {
             username: username,
             accept: false
         })

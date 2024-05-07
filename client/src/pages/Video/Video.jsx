@@ -38,7 +38,7 @@ function Video() {
         setCommentText('');
 
         // Send the new comment to the server
-        axios.post(`http://localhost:5050/videos/${video_id}/comments`, newComment)
+        axios.post(`https://hdt-6-backend.vercel.app/videos/${video_id}/comments`, newComment)
             .then(response => {
                 console.log('Comment added successfully:', response.data);
             })
@@ -48,13 +48,13 @@ function Video() {
     };
 
     useEffect(() => {
-        axios.get(`http://localhost:5050/videos/${video_id}`)
+        axios.get(`https://hdt-6-backend.vercel.app/videos/${video_id}`)
             .then(response => {
                 setVideo(response.data);
                 setComments(response.data.comments ? response.data.comments.sort((a, b) => new Date(b.date) - new Date(a.date)).reverse() : []);
                 console.log('Video views before increment:', response.data.views);
                 if (!viewIncremented) {
-                    axios.put(`http://localhost:5050/videos/${video_id}/view`, {}, { params: { views: response.data.views + 1 } }) // Incrementar views en 1
+                    axios.put(`https://hdt-6-backend.vercel.app/videos/${video_id}/view`, {}, { params: { views: response.data.views + 1 } }) // Incrementar views en 1
                         .then(response => {
                             setViewIncremented(true); // Marcar que la vista ha sido incrementada
                         })

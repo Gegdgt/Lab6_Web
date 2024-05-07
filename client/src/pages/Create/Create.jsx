@@ -28,7 +28,7 @@ function Create() {
           };
           
         try {
-            await axios.post('http://localhost:5050/videos', video);
+            await axios.post('https://hdt-6-backend.vercel.app/videos', video);
             alert('Video created successfully');
         } catch (error) {
             console.error('Error creating video:', error);

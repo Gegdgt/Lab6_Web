@@ -19,10 +19,10 @@ function User() {
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5050/user?username=${username}`)
+        axios.get(`https://hdt-6-backend.vercel.app/user?username=${username}`)
             .then(response => {
                 const userId = response.data.user_id;
-                axios.get(`http://localhost:5050/videosByCreator?creator=${userId}`)
+                axios.get(`https://hdt-6-backend.vercel.app/videosByCreator?creator=${userId}`)
                     .then(response => {
                         if (Array.isArray(response.data)) {
                             console.log(response.data);
@@ -56,7 +56,7 @@ function User() {
       function deleteClick(video) {
         const confirmDelete = window.confirm('¿Estás seguro de que quieres eliminar este video?');
         if (confirmDelete) {
-            axios.delete(`http://localhost:5050/videos/${video.video_id}`)
+            axios.delete(`https://hdt-6-backend.vercel.app/videos/${video.video_id}`)
                 .then(response => {
                     console.log('Video eliminado:', response.data);
                     // Eliminar el video eliminado del array de videos

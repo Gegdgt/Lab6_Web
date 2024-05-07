@@ -11,7 +11,7 @@ function Main() {
 
     useEffect(() => {
         const pageSize = 10;
-        axios.get(`http://localhost:5050/videos?page=${page}&pageSize=${pageSize}`)
+        axios.get(`https://hdt-6-backend.vercel.app/videos?page=${page}&pageSize=${pageSize}`)
             .then(response => {
                 const fetchedVideos = response.data;
                 const videosWithCreators = fetchedVideos.map(video => {
