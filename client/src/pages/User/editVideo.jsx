@@ -20,7 +20,7 @@ function EditVideo({ video, recommendations, setShowEditButton, setShowInitialIn
         event.preventDefault();
         try {
             console.log(editedVideo.video_id);
-            const response = await axios.put(`http://localhost:5050/videos/${editedVideo.video_id}, editedVideo`);
+            const response = await axios.put(`http://localhost:5050/videos/${editedVideo.video_id}`, editedVideo);
             console.log(response.data);
             window.location.reload();
             setShowEditButton(false);
