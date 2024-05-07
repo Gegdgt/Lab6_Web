@@ -37,22 +37,18 @@ function Main() {
                     <div className="blog-item">
                         <h3>Introducción a la Programación</h3>
                         <p>Descubre los conceptos básicos de la programación y cómo comenzar tu viaje en el mundo del desarrollo de software.</p>
-                        <a href="#">Leer más</a>
                     </div>
                     <div className="blog-item">
                         <h3>Aprende JavaScript desde Cero</h3>
                         <p>Domina uno de los lenguajes de programación más populares y poderosos para crear aplicaciones web interactivas.</p>
-                        <a href="#">Leer más</a>
                     </div>
                     <div className="blog-item">
                         <h3>Introducción a React</h3>
                         <p>Descubre el framework de JavaScript más popular para construir interfaces de usuario modernas y eficientes.</p>
-                        <a href="#">Leer más</a>
                     </div>
                     <div className="blog-item">
                         <h3>Construyendo una API con Node.js</h3>
                         <p>Aprende a crear una API RESTful utilizando Node.js y Express para construir aplicaciones web escalables y robustas.</p>
-                        <a href="#">Leer más</a>
                     </div>
                 </div>
             </div>
