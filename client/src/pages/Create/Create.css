@@ -36,3 +36,13 @@
 .create-form button:hover {
     background-color: #0056b3;
 }
+
+.create-form textarea {
+    width: calc(100% - 16px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    height: 150px; 
+}

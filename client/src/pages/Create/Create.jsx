@@ -5,7 +5,7 @@ import './Create.css';
 function Create() {
     const [name, setName] = useState('');
     const [duration, setDuration] = useState('');
-    const [views, setViews] = useState('');
+    const [description, setDescription] = useState('');
     const [url, setUrl] = useState('');
 
     const handleSubmit = async (event) => {
@@ -13,10 +13,20 @@ function Create() {
 
         const creation_date = new Date().toISOString();
         const creator_id = localStorage.getItem('user_id');
+        console.log(creator_id);
         const video_id = Math.floor(Math.random() * (99999999999999 - 10000000000000 + 1)) + 10000000000000;
-
-        const video = { video_id, name, duration, views, url, creation_date, creator_id };
-x
+        const views = 0;
+        const video = {
+            video_id,
+            name,
+            duration: parseFloat(duration), 
+            views,
+            url,
+            creation_date,
+            creator_id,
+            description
+          };
+          
         try {
             await axios.post('http://localhost:5050/videos', video);
             alert('Video created successfully');
@@ -29,16 +39,16 @@ x
     return (
         <form className="create-form" onSubmit={handleSubmit}>
             <label>
-                Name:
+                Nombre:
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
             </label>
             <label>
-                Duration (in seconds):
-                <input type="number" value={duration} onChange={(e) => setDuration(e.target.value)} />
+                Duración:
+                <input type="text" value={duration} onChange={(e) => setDuration(e.target.value)} />
             </label>
             <label>
-                Views:
-                <input type="number" value={views} onChange={(e) => setViews(e.target.value)} />
+                Descripción:
+                <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
             </label>
             <label>
                 URL:
