@@ -3,10 +3,11 @@ const mongoose = require('mongoose');
 const VideoSchema = new mongoose.Schema({
     video_id: Number,
     name: String,
-    duration: Number, // Duration in seconds
+    duration: Number, // Duración en segundos
     views: Number,
-    creator_id: Number, // Reference to the creator's ID in the Usuarios collection
+    creator_id: Number, // Referencia al ID del creador en la colección Usuarios
     creation_date: String,
+    description: String,
     tags: [{
         tag: String
     }],
